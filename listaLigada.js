@@ -1,76 +1,76 @@
-class No {
-  constructor(dado) {
-    this.dado = dado
-    this.proximo = null
+class Node {
+  constructor(data) {
+    this.data = data
+    this.next = null
   }
 }
 
 class ListaLigada {
   constructor() {
-    this.cabeca = null
-    this.tamanho = 0
+    this.head = null
+    this.size = 0
   }
 
   // Adiciona um novo elemento ao final da lista
-  adicionar(dado) {
-    const novoNo = new No(dado)
+  add(data) {
+    const newNode = new Node(data)
 
-    if (this.cabeca === null) {
-      this.cabeca = novoNo
+    if (this.head === null) {
+      this.head = newNode
     } else {
-      let atual = this.cabeca
-      while (atual.proximo !== null) {
-        atual = atual.proximo
+      let current = this.head
+      while (current.next !== null) {
+        current = current.next
       }
-      atual.proximo = novoNo
+      current.next = newNode
     }
-    this.tamanho++
+    this.size++
   }
 
   // Remove um elemento da lista baseado no valor
-  remover(dado) {
-      let atual = this.cabeca
+  remove(data) {
+      let current = this.head
       let anterior = null
 
-      while (atual !== null) {
-        if (atual.dado === dado) {
+      while (current !== null) {
+        if (current.data === data) {
           if (anterior === null) {
-            this.cabeca = atual.proximo
+            this.head = current.next
           } else {
-            anterior.proximo = atual.proximo
+            anterior.next = current.next
           }
-          this.tamanho--
-          return atual.dado
+          this.size--
+          return current.data
         }
-        anterior = atual
-        atual = atual.proximo
+        anterior = current
+        current = current.next
       }
       return -1 // Retorna -1 se o elemento não for encontrado
   }
 
-  // Retorna o tamanho da lista
-  obterTamanho() {
-    return this.tamanho
+  // Retorna o size da lista
+  size() {
+    return this.size
   }
 
   // Imprime os elementos da lista
-  imprimir() {
-    let atual = this.cabeca
-    let resultado = ''
-    while (atual !== null) {
-      resultado += atual.dado + ' '
-      atual = atual.proximo
+  print() {
+    let current = this.head
+    let result = ''
+    while (current !== null) {
+      result += current.data + ' '
+      current = current.next
     }
-    console.log(resultado)
+    console.log(result)
   }
 }
 
 // Exemplo de uso:
 const lista = new ListaLigada()
-lista.adicionar(1)
-lista.adicionar(2)
-lista.adicionar(3)
-lista.imprimir()
-lista.remover(2)
-lista.imprimir()
-console.log(lista.obterTamanho())
+lista.add(1)
+lista.add(2)
+lista.add(3)
+lista.print()
+lista.remove(2)
+lista.print()
+console.log(lista.size())
